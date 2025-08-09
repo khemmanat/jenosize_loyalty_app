@@ -28,9 +28,6 @@ class PointsPage extends ConsumerWidget {
         ],
       ),
       body: _buildBody(context, pointsState, pointsNotifier),
-      bottomNavigationBar: AppBottomNavigation(
-        currentIndex: 3,
-      ),
     );
   }
 

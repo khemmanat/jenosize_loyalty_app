@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class AppBottomNavigation extends StatelessWidget {
-  const AppBottomNavigation({super.key, required this.currentIndex});
+  const AppBottomNavigation({super.key, required this.currentIndex, required this.onDestinationSelected});
 
   final int currentIndex;
+  final void Function(int index) onDestinationSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class AppBottomNavigation extends StatelessWidget {
       currentIndex: currentIndex,
       selectedItemColor: Theme.of(context).colorScheme.primary,
       unselectedItemColor: Theme.of(context).colorScheme.outline,
-      onTap: (index) => _handleNavigation(context, index),
+      onTap: (index) => onDestinationSelected(index),
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
@@ -35,20 +35,20 @@ class AppBottomNavigation extends StatelessWidget {
     );
   }
 
-  void _handleNavigation(BuildContext context, int index) {
-    switch (index) {
-      case 0:
-        context.go('/');
-        break;
-      case 1:
-        context.go('/membership');
-        break;
-      case 2:
-        context.go('/referral');
-        break;
-      case 3:
-        context.go('/points');
-        break;
-    }
-  }
+  // void _handleNavigation(BuildContext context, int index) {
+  //   switch (index) {
+  //     case 0:
+  //       context.go('/');
+  //       break;
+  //     case 1:
+  //       context.go('/membership');
+  //       break;
+  //     case 2:
+  //       context.go('/referral');
+  //       break;
+  //     case 3:
+  //       context.go('/points');
+  //       break;
+  //   }
+  // }
 }

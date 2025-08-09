@@ -38,9 +38,6 @@ class ReferralPage extends ConsumerWidget {
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       ),
       body: _buildBody(context, referralState, referralNotifier),
-      bottomNavigationBar: AppBottomNavigation(
-        currentIndex: 2,
-      ),
     );
   }
 

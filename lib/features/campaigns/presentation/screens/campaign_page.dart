@@ -26,9 +26,6 @@ class CampaignPage extends ConsumerWidget {
         ],
       ),
       body: _buildBody(context, campaignState, campaignNotifier),
-      bottomNavigationBar: AppBottomNavigation(
-        currentIndex: 0,
-      ),
     );
   }
 

@@ -33,9 +33,6 @@ class _MembershipPageState extends ConsumerState<MembershipPage> {
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       ),
       body: _buildBody(membershipState, membershipNotifier),
-      bottomNavigationBar: AppBottomNavigation(
-        currentIndex: 1,
-      ),
     );
   }
 

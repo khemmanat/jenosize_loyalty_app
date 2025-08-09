@@ -33,7 +33,7 @@ class MemberModel extends Member {
     return {
       'id': id,
       'name': name,
-      'joinedDate': joinDate.toIso8601String(),
+      'joinDate': joinDate.toIso8601String(),
       'isActive': isActive,
     };
   }
