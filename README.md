@@ -60,8 +60,8 @@ lib/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/jenosize-loyalty-app.git
-cd jenosize-loyalty-app
+git clone https://github.com/khemmanat/jenosize_loyalty_app
+cd jenosize_loyalty_app
 
 # 2. Install dependencies
 flutter pub get
