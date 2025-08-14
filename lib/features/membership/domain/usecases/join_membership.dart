@@ -1,11 +1,11 @@
-import 'package:jenosize_loyalty_app/features/membership/domain/repositories/membership_repository.dart';
+import '../../../../core/errors/result.dart';
+import '../entities/member.dart';
+import '../repositories/membership_repository.dart';
 
 class JoinMembership {
-  final MembershipRepository repository;
+  final MembershipRepository repo;
 
-  JoinMembership(this.repository);
+  JoinMembership(this.repo);
 
-  Future<void> call(String name) async {
-    await repository.joinMembership(name);
-  }
+  Future<Result<Member>> call(String name) => repo.joinMembership(name: name);
 }

@@ -1,6 +1,7 @@
-import 'package:jenosize_loyalty_app/features/membership/domain/entities/member.dart';
+import '../../../../core/errors/result.dart';
+import '../entities/member.dart';
 
 abstract class MembershipRepository {
-  Future<Member?> getMembershipStatus();
-  Future<void> joinMembership(String name);
+  Future<Result<Member>> getMember();
+  Future<Result<Member>> joinMembership({required String name});
 }

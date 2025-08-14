@@ -1,7 +1,7 @@
 class AppConstants {
   static const String appName = 'Jenosize - Loyalty App';
   static const String appVersion = '1.0.0';
-  static const String apiBaseUrl = 'https://api.example.com';
+  static const String apiBaseUrl = 'https://jenosize-loyalty-api.nexithlabs.com';
   static const int defaultTimeout = 30; // in seconds
   static const String supportEmail = '';
 

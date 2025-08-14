@@ -1,38 +1,47 @@
 import 'package:equatable/equatable.dart';
-
-enum TransactionType { earned, spent, bonus }
+import '../../../../shared/domain/value_objects.dart';
 
 class PointTransaction extends Equatable {
   final String id;
-  final TransactionType type;
-  final int amount;
+  final String userId;
+  final int points; // + earn, - spend
+  final PointTransactionType type;
   final String description;
-  final DateTime date;
+  final String? referenceId;
+  final DateTime createdAt; // store UTC
 
   const PointTransaction({
     required this.id,
+    required this.userId,
+    required this.points,
     required this.type,
-    required this.amount,
     required this.description,
-    required this.date,
+    this.referenceId,
+    required this.createdAt,
   });
+
+  bool get isEarned => points > 0;
+  bool get isSpent => points < 0;
+  int get amountAbs => points.abs();
 
   PointTransaction copyWith({
     String? id,
-    TransactionType? type,
-    int? amount,
+    String? userId,
+    int? points,
+    PointTransactionType? type,
     String? description,
-    DateTime? date,
-  }) {
-    return PointTransaction(
-      id: id ?? this.id,
-      type: type ?? this.type,
-      amount: amount ?? this.amount,
-      description: description ?? this.description,
-      date: date ?? this.date,
-    );
-  }
+    String? referenceId,
+    DateTime? createdAt,
+  }) => PointTransaction(
+    id: id ?? this.id,
+    userId: userId ?? this.userId,
+    points: points ?? this.points,
+    type: type ?? this.type,
+    description: description ?? this.description,
+    referenceId: referenceId ?? this.referenceId,
+    createdAt: createdAt ?? this.createdAt,
+  );
 
   @override
-  List<Object> get props => [id, type, amount, description, date];
+  List<Object?> get props => [id, userId, points, type, description, referenceId, createdAt];
 }

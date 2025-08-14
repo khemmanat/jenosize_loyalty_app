@@ -1,6 +1,7 @@
-import 'package:jenosize_loyalty_app/features/campaigns/domain/entities/campaign.dart';
+import '../../../../core/errors/result.dart';
+import '../entities/campaign.dart';
 
-abstract class CampaignRepository {
-  Future<List<Campaign>> getCampaigns();
-  Future<void> joinCampaign(String campaignId);
+abstract class CampaignsRepository {
+  Future<Result<List<Campaign>>> listCampaigns({int page = 1, int limit = 20});
+  Future<Result<void>> joinCampaign(String campaignId); // server จะจัดการแต้ม
 }

@@ -2,22 +2,33 @@ import 'package:jenosize_loyalty_app/features/membership/data/datasources/local/
 import 'package:jenosize_loyalty_app/features/membership/domain/entities/member.dart';
 import 'package:jenosize_loyalty_app/features/membership/domain/repositories/membership_repository.dart';
 
-class MembershipRepositoryImpl implements MembershipRepository {
-  final MembershipLocalDataSource localDataSource;
+import '../../../../core/errors/result.dart';
+import '../datasources/local/datasources/membership_remote_data_source.dart';
 
-  MembershipRepositoryImpl({required this.localDataSource});
+class MembershipRepositoryImpl implements MembershipRepository {
+  final MembershipRemoteDataSource remote;
+  final MembershipLocalDataSource local;
+
+  MembershipRepositoryImpl(this.remote, this.local);
 
   @override
-  Future<Member?> getMembershipStatus() async {
-    print('Fetching membership status from local data source...');
-    final memberModel = await localDataSource.getMembershipStatus();
-    // check of data type in member Model is MemberModel
-    print('MemberModel type: ${memberModel.toString()}');
-    return memberModel?.toEntity();
+  Future<Result<Member>> getMember() async {
+    final r = await remote.getMe();
+    return r.fold(
+      onSuccess: (dto) async { final m = dto.toDomain(); await local.cacheMember(m); return Ok(m); },
+      onFailure: (f) async {
+        final cached = await local.getCachedMember();
+        return cached.fold(onSuccess: (m) => m != null ? Ok(m) : Err(f), onFailure: (_) => Err(f));
+      },
+    );
   }
 
   @override
-  Future<void> joinMembership(String name) async {
-    return await localDataSource.joinMembership(name);
+  Future<Result<Member>> joinMembership({required String name}) async {
+    final r = await remote.join(name: name);
+    return r.fold(
+      onSuccess: (dto) async { final m = dto.toDomain(); await local.cacheMember(m); return Ok(m); },
+      onFailure: (f) => Err(f),
+    );
   }
 }

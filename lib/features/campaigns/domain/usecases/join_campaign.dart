@@ -1,11 +1,10 @@
-import 'package:jenosize_loyalty_app/features/campaigns/domain/repositories/campaign_repository.dart';
+import '../../../../core/errors/result.dart';
+import '../repositories/campaign_repository.dart';
 
 class JoinCampaign {
-  final CampaignRepository repository;
+  final CampaignsRepository repo;
 
-  JoinCampaign(this.repository);
+  JoinCampaign(this.repo);
 
-  Future<void> call(String campaignId) async {
-    await repository.joinCampaign(campaignId);
-  }
+  Future<Result<void>> call(String campaignId) => repo.joinCampaign(campaignId);
 }

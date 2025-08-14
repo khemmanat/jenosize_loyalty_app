@@ -1,11 +1,11 @@
 import 'package:jenosize_loyalty_app/features/points/domain/repositories/points_repository.dart';
 
+import '../../../../core/errors/result.dart';
+
 class GetPointsBalance {
-  final PointsRepository _pointsRepository;
+  final PointsRepository repo;
 
-  GetPointsBalance(this._pointsRepository);
+  GetPointsBalance(this.repo);
 
-  Future<int> call() async {
-    return await _pointsRepository.getPointsBalance();
-  }
+  Future<Result<int>> call() => repo.getBalance();
 }
