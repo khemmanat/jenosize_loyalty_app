@@ -256,15 +256,14 @@ flutter run --dart-define=BASE_URL=http://10.0.2.2:8080
 This project is already structured well as clean architecture with feature-first organization. Each feature is self-contained, making it easy to scale and maintain. The use of Riverpod for dependency injection and state management allows for clear separation of concerns and testability.
 The modular approach means that each feature can evolve independently, and new features can be added without affecting existing ones. This is ideal for a loyalty app where features like campaigns, membership, referral, and points can grow or change over time.
 
-The multi-module project setup will be different from this by using ```melos``` to manage the project as a monorepo. Each feature will be a separate package under the `packages/` directory, allowing for better isolation and reusability of code across features. This setup will also facilitate easier dependency management and versioning of each feature module.
+* **The multi-module project setup will be different from this by using ```melos``` to manage the project as a monorepo. Each feature will be a separate package under the `packages/` directory, allowing for better isolation and reusability of code across features. This setup will also facilitate easier dependency management and versioning of each feature module.
 And all of the project will be in the packages/ directory, with the main app in `packages/app/`. This will allow for a clean separation of the app logic from the feature modules, making it easier to manage dependencies and updates.
 The multi-module project can be discussed into two patterns:
 
 1. **Feature First**: Each feature is a separate package, with its own presentation, domain, and data layers. This allows for clear boundaries and easy testing of each feature independently.
 2. **Layered**: Each layer (presentation, domain, data) is a separate
 
-package, with features depending on these layers. 
-This allows for shared logic across features but can lead to tighter coupling between features.
+* **package, with features depending on these layers. This allows for shared logic across features but can lead to tighter coupling between features.
 ---
 
 ## 📄 License
