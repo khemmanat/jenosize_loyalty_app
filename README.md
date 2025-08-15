@@ -262,7 +262,9 @@ The multi-module project can be discussed into two patterns:
 
 1. **Feature First**: Each feature is a separate package, with its own presentation, domain, and data layers. This allows for clear boundaries and easy testing of each feature independently.
 2. **Layered**: Each layer (presentation, domain, data) is a separate
-package, with features depending on these layers. This allows for shared logic across features but can lead to tighter coupling between features.
+
+package, with features depending on these layers. 
+This allows for shared logic across features but can lead to tighter coupling between features.
 ---
 
 ## 📄 License
