@@ -27,12 +27,26 @@ class PointsRemoteDataSourceImpl implements PointsRemoteDataSource {
   Future<Result<List<PointTransactionDto>>> getTransactions({required int page, required int limit}) async {
     try {
       final r = await dio.get('/api/points/transactions', queryParameters: {'page': page, 'limit': limit});
-      final items = (r.data['items'] as List).map((j) => PointTransactionDto.fromJson(j)).toList();
+
+      // Ensure we have the right data structure
+      final responseData = r.data;
+      if (responseData is! Map<String, dynamic>) {
+        return const Err(UnexpectedFailure('Invalid response format'));
+      }
+
+      final itemsData = responseData['items'];
+      if (itemsData is! List) {
+        return const Err(UnexpectedFailure('Items field is not a list'));
+      }
+
+      print('Fetched ${itemsData.length} transactions from API');
+
+      final items = itemsData.map((j) => PointTransactionDto.fromJson(j)).toList();
       return Ok(items);
     } on DioException catch (e) {
       return Err(NetworkFailure(e.message ?? 'Network error', code: e.response?.statusCode));
-    } catch (_) {
-      return const Err(UnexpectedFailure('Unexpected error'));
+    } catch (e) {
+      return Err(UnexpectedFailure('Unexpected error: ${e.toString()}'));
     }
   }
 
