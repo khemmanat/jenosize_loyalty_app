@@ -1,4 +1,5 @@
 import '../../../../core/errors/result.dart';
+import '../entities/campaign_join_result.dart';
 import '../repositories/campaign_repository.dart';
 
 class JoinCampaign {
@@ -6,5 +7,5 @@ class JoinCampaign {
 
   JoinCampaign(this.repo);
 
-  Future<Result<void>> call(String campaignId) => repo.joinCampaign(campaignId);
+  Future<Result<CampaignJoinResult>> call(String campaignId) => repo.joinCampaign(campaignId);
 }

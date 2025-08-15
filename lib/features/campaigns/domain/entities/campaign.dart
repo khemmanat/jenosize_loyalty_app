@@ -13,6 +13,9 @@ class Campaign extends Equatable {
   final DateTime? startsAt;
   final DateTime? endsAt;
 
+  final bool isJoined;
+  final DateTime? joinedAt;
+
   const Campaign({
     required this.id,
     required this.title,
@@ -25,34 +28,42 @@ class Campaign extends Equatable {
     required this.createdAt,
     this.startsAt,
     this.endsAt,
+    this.isJoined = false,
+    this.joinedAt,
   });
 
-  Campaign copyWith(
-          {String? id,
-          String? title,
-          String? description,
-          String? imageUrl,
-          String? ctaText,
-          String? ctaUrl,
-          int? rewardPoints,
-          bool? isActive,
-          DateTime? createdAt,
-          DateTime? startsAt,
-          DateTime? endsAt}) =>
-      Campaign(
-        id: id ?? this.id,
-        title: title ?? this.title,
-        description: description ?? this.description,
-        imageUrl: imageUrl ?? this.imageUrl,
-        ctaText: ctaText ?? this.ctaText,
-        ctaUrl: ctaUrl ?? this.ctaUrl,
-        rewardPoints: rewardPoints ?? this.rewardPoints,
-        isActive: isActive ?? this.isActive,
-        createdAt: createdAt ?? this.createdAt,
-        startsAt: startsAt ?? this.startsAt,
-        endsAt: endsAt ?? this.endsAt,
-      );
+  Campaign copyWith({
+    String? id,
+    String? title,
+    String? description,
+    String? imageUrl,
+    String? ctaText,
+    String? ctaUrl,
+    int? rewardPoints,
+    bool? isActive,
+    DateTime? createdAt,
+    DateTime? startsAt,
+    DateTime? endsAt,
+    bool? isJoined,
+    DateTime? joinedAt,
+  }) {
+    return Campaign(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      imageUrl: imageUrl ?? this.imageUrl,
+      ctaText: ctaText ?? this.ctaText,
+      ctaUrl: ctaUrl ?? this.ctaUrl,
+      rewardPoints: rewardPoints ?? this.rewardPoints,
+      isActive: isActive ?? this.isActive,
+      createdAt: createdAt ?? this.createdAt,
+      startsAt: startsAt ?? this.startsAt,
+      endsAt: endsAt ?? this.endsAt,
+      isJoined: isJoined ?? this.isJoined,
+      joinedAt: joinedAt ?? this.joinedAt,
+    );
+  }
 
   @override
-  List<Object?> get props => [id, title, description, imageUrl, ctaText, ctaUrl, rewardPoints, isActive, createdAt, startsAt, endsAt];
+  List<Object?> get props => [id, title, description, imageUrl, ctaText, ctaUrl, rewardPoints, isActive, createdAt, startsAt, endsAt, isJoined, joinedAt];
 }

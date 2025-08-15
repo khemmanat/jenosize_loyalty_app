@@ -13,33 +13,42 @@ class CampaignDto {
   final DateTime createdAt;
   final DateTime? startsAt, endsAt;
 
-  CampaignDto(
-      {required this.id,
-      required this.title,
-      required this.description,
-      required this.imageUrl,
-      required this.ctaText,
-      this.ctaUrl,
-      required this.rewardPoints,
-      required this.isActive,
-      required this.createdAt,
-      this.startsAt,
-      this.endsAt});
+  final bool isJoined;
+  final DateTime? joinedAt;
+
+  CampaignDto({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.imageUrl,
+    required this.ctaText,
+    this.ctaUrl,
+    required this.rewardPoints,
+    required this.isActive,
+    required this.createdAt,
+    this.startsAt,
+    this.endsAt,
+    this.isJoined = false,
+    this.joinedAt,
+  });
 
   factory CampaignDto.fromJson(Map<String, dynamic> json) => _$CampaignDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$CampaignDtoToJson(this);
 
   Campaign toDomain() => Campaign(
-      id: id,
-      title: title,
-      description: description,
-      imageUrl: imageUrl,
-      ctaText: ctaText,
-      ctaUrl: ctaUrl,
-      rewardPoints: rewardPoints,
-      isActive: isActive,
-      createdAt: createdAt.toUtc(),
-      startsAt: startsAt?.toUtc(),
-      endsAt: endsAt?.toUtc());
+        id: id,
+        title: title,
+        description: description,
+        imageUrl: imageUrl,
+        ctaText: ctaText,
+        ctaUrl: ctaUrl,
+        rewardPoints: rewardPoints,
+        isActive: isActive,
+        createdAt: createdAt.toUtc(),
+        startsAt: startsAt?.toUtc(),
+        endsAt: endsAt?.toUtc(),
+        isJoined: isJoined,
+        joinedAt: joinedAt?.toUtc(),
+      );
 }

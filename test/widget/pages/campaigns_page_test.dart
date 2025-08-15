@@ -11,7 +11,7 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            campaignsPage1Provider.overrideWith(
+            campaignsVMProvider.overrideWith(
                   (ref) => Future.delayed(const Duration(seconds: 10)),
             ),
           ],
@@ -39,8 +39,8 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            campaignsPage1Provider.overrideWith(
-                  (ref) => Future.value(mockCampaigns),
+            campaignsVMProvider.overrideWith(
+                  (ref) => mockCampaigns,
             ),
           ],
           child: const MaterialApp(home: CampaignsPage()),
@@ -56,7 +56,7 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            campaignsPage1Provider.overrideWith(
+            campaignsVMProvider.overrideWith(
                     (ref) => Future.error('Network error'),
             ),
           ],

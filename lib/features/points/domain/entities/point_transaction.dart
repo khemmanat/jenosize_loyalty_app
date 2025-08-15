@@ -42,6 +42,18 @@ class PointTransaction extends Equatable {
     createdAt: createdAt ?? this.createdAt,
   );
 
+  factory PointTransaction.fromJson(Map<String, dynamic> json) {
+    return PointTransaction(
+      id: json['id'] as String,
+      userId: json['userId'] as String,
+      points: json['points'] as int,
+      type: PointTransactionType.fromString(json['type'] as String),
+      description: json['description'] as String,
+      referenceId: json['referenceId'] as String?,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+    );
+  }
+
   @override
   List<Object?> get props => [id, userId, points, type, description, referenceId, createdAt];
 }

@@ -1,14 +1,48 @@
-enum PointTransactionType { earn, spend, redeem, adjust, referral, campaignJoin, unknown }
+enum PointTransactionType {
+  earn,
+  spend,
+  redeem,
+  adjust,
+  referral,
+  campaignJoin,
+  unknown;
+
+  static PointTransactionType fromString(String s) {
+    switch (s.toLowerCase()) {
+      case 'earn':
+        return PointTransactionType.earn;
+      case 'spend':
+        return PointTransactionType.spend;
+      case 'redeem':
+        return PointTransactionType.redeem;
+      case 'adjust':
+        return PointTransactionType.adjust;
+      case 'referral':
+        return PointTransactionType.referral;
+      case 'campaign_join':
+        return PointTransactionType.campaignJoin;
+      default:
+        return PointTransactionType.unknown;
+    }
+  }
+}
 
 PointTransactionType pointTypeFromString(String s) {
   switch (s.toLowerCase()) {
-    case 'earn': return PointTransactionType.earn;
-    case 'spend': return PointTransactionType.spend;
-    case 'redeem': return PointTransactionType.redeem;
-    case 'adjust': return PointTransactionType.adjust;
-    case 'referral': return PointTransactionType.referral;
-    case 'campaign_join': return PointTransactionType.campaignJoin;
-    default: return PointTransactionType.unknown;
+    case 'earn':
+      return PointTransactionType.earn;
+    case 'spend':
+      return PointTransactionType.spend;
+    case 'redeem':
+      return PointTransactionType.redeem;
+    case 'adjust':
+      return PointTransactionType.adjust;
+    case 'referral':
+      return PointTransactionType.referral;
+    case 'campaign_join':
+      return PointTransactionType.campaignJoin;
+    default:
+      return PointTransactionType.unknown;
   }
 }
 

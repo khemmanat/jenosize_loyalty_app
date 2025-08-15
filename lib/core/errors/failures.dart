@@ -32,6 +32,10 @@ class ServerFailure extends Failure {
   const ServerFailure(super.message);
 }
 
+class CacheFailure extends Failure {
+  const CacheFailure(super.message);
+}
+
 // Enhanced error handling utility
 class ApiErrorHandler {
   static Failure handleDioError(dynamic error) {
