@@ -47,7 +47,6 @@ flutter run
 
 ```bash
 flutter analyze
-dart run dart_code_metrics:metrics analyze lib
 flutter test
 ```
 
@@ -233,10 +232,8 @@ Run: `flutter test`
 # Codegen
 dart run build_runner build -d
 
-# Analyze & metrics
+# Analyze
 flutter analyze
-dart run dart_code_metrics:metrics analyze lib
-
 # Run app with API base URL
 flutter run --dart-define=BASE_URL=http://10.0.2.2:8080
 ```
