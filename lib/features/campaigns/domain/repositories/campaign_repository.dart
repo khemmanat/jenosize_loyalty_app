@@ -1,7 +1,6 @@
 import '../../../../core/errors/result.dart';
 import '../entities/campaign.dart';
 import '../entities/campaign_join_result.dart';
-import '../usecases/join_campaign.dart';
 
 abstract class CampaignsRepository {
   Future<Result<List<Campaign>>> listCampaigns({int page, int limit});

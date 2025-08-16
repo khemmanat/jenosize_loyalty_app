@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../shared/domain/value_objects.dart';
+import '../../../../shared/domain/domain.dart';
 
 class Member extends Equatable {
   final String id;

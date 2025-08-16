@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import '../../../../shared/domain/value_objects.dart';
+import '../../../../shared/domain/domain.dart';
 import '../../domain/entities/point_transaction.dart';
 
 part 'point_transaction_dto.g.dart';

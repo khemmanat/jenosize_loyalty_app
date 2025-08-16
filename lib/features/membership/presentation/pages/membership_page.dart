@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jenosize_loyalty_app/shared/shared.dart';
 
-import '../../../../shared/domain/value_objects.dart';
 import '../../di/membership_di.dart';
 import '../../domain/entities/member.dart';
 import '../providers/membership_ui_providers.dart';
@@ -55,17 +55,9 @@ class _MembershipPageState extends ConsumerState<MembershipPage> with SingleTick
   Widget build(BuildContext context) {
     final memberState = ref.watch(memberProvider);
 
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
-      appBar: AppBar(
-        title: const Text(
-          'Membership',
-          style: TextStyle(fontWeight: FontWeight.w600),
-        ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        foregroundColor: Theme.of(context).colorScheme.onSurface,
+    return AppScaffold(
+      appBar: MainAppBar(
+        title: 'Membership',
       ),
       body: RefreshIndicator(
         onRefresh: () async => ref.invalidate(memberProvider),
@@ -123,7 +115,7 @@ class _MembershipPageState extends ConsumerState<MembershipPage> with SingleTick
     result.fold(
       onSuccess: (_) {
         if (!mounted) return;
-        ScaffoldMessenger.of(context).clearSnackBars();
+        context.clearSnackBars();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Row(
@@ -144,7 +136,7 @@ class _MembershipPageState extends ConsumerState<MembershipPage> with SingleTick
       },
       onFailure: (failure) {
         if (!mounted) return;
-        ScaffoldMessenger.of(context).clearSnackBars();
+        context.clearSnackBars();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Row(
@@ -203,8 +195,6 @@ class _MemberView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     final tierColor = _getTierColor(context);
 
     return FadeTransition(
@@ -272,13 +262,13 @@ class _WelcomeHeader extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            tierColor.withOpacity(0.1),
-            theme.colorScheme.primaryContainer.withOpacity(0.3),
+            tierColor.withValues(alpha: 0.1),
+            theme.colorScheme.primaryContainer.withValues(alpha: 0.3),
           ],
         ),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: tierColor.withOpacity(0.3),
+          color: tierColor.withValues(alpha: 0.3),
           width: 1,
         ),
       ),
@@ -296,7 +286,7 @@ class _WelcomeHeader extends StatelessWidget {
           Text(
             joinDuration > 0 ? 'Member for $joinDuration days' : 'Just joined today!',
             style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.onSurface.withOpacity(0.7),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
         ],
@@ -328,13 +318,13 @@ class _MembershipCard extends StatelessWidget {
           end: Alignment.bottomRight,
           colors: [
             tierColor,
-            tierColor.withOpacity(0.7),
+            tierColor.withValues(alpha: 0.7),
           ],
         ),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: tierColor.withOpacity(0.3),
+            color: tierColor.withValues(alpha: 0.3),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),
@@ -350,7 +340,7 @@ class _MembershipCard extends StatelessWidget {
               width: 150,
               height: 150,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.1),
+                color: Colors.white.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
             ),
@@ -362,7 +352,7 @@ class _MembershipCard extends StatelessWidget {
               width: 100,
               height: 100,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.05),
+                color: Colors.white.withValues(alpha: 0.05),
                 shape: BoxShape.circle,
               ),
             ),
@@ -381,7 +371,7 @@ class _MembershipCard extends StatelessWidget {
                     Text(
                       'MEMBERSHIP CARD',
                       style: theme.textTheme.labelMedium?.copyWith(
-                        color: Colors.white.withOpacity(0.8),
+                        color: Colors.white.withValues(alpha: 0.8),
                         letterSpacing: 1.5,
                         fontWeight: FontWeight.w600,
                       ),
@@ -411,7 +401,7 @@ class _MembershipCard extends StatelessWidget {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
+                        color: Colors.white.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
@@ -428,7 +418,7 @@ class _MembershipCard extends StatelessWidget {
                 Text(
                   'Member since ${member.joinDate.year}',
                   style: theme.textTheme.bodySmall?.copyWith(
-                    color: Colors.white.withOpacity(0.8),
+                    color: Colors.white.withValues(alpha: 0.8),
                   ),
                 ),
               ],
@@ -486,7 +476,7 @@ class _BenefitsSection extends StatelessWidget {
                 color: colorScheme.surfaceContainer,
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: colorScheme.outline.withOpacity(0.1),
+                  color: colorScheme.outline.withValues(alpha: 0.1),
                 ),
               ),
               child: Row(
@@ -518,7 +508,7 @@ class _BenefitsSection extends StatelessWidget {
                         Text(
                           benefit['description'] as String,
                           style: theme.textTheme.bodyMedium?.copyWith(
-                            color: colorScheme.onSurface.withOpacity(0.7),
+                            color: colorScheme.onSurface.withValues(alpha: 0.7),
                           ),
                         ),
                       ],
@@ -606,7 +596,7 @@ class _StatItem extends StatelessWidget {
         color: colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: colorScheme.outline.withOpacity(0.1),
+          color: colorScheme.outline.withValues(alpha: 0.1),
         ),
       ),
       child: Column(
@@ -628,7 +618,7 @@ class _StatItem extends StatelessWidget {
           Text(
             label,
             style: theme.textTheme.bodySmall?.copyWith(
-              color: colorScheme.onSurface.withOpacity(0.7),
+              color: colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
         ],
@@ -641,7 +631,6 @@ class _QuickActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -703,7 +692,7 @@ class _ActionButton extends StatelessWidget {
       label: Text(label),
       style: OutlinedButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-        side: BorderSide(color: colorScheme.outline.withOpacity(0.3)),
+        side: BorderSide(color: colorScheme.outline.withValues(alpha: 0.3)),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -756,7 +745,7 @@ class _JoinForm extends StatelessWidget {
                             end: Alignment.bottomRight,
                             colors: [
                               colorScheme.primaryContainer,
-                              colorScheme.primary.withOpacity(0.1),
+                              colorScheme.primary.withValues(alpha: 0.1),
                             ],
                           ),
                           shape: BoxShape.circle,
@@ -786,7 +775,7 @@ class _JoinForm extends StatelessWidget {
                       Text(
                         'Start earning points, unlock rewards, and enjoy exclusive benefits',
                         style: theme.textTheme.bodyLarge?.copyWith(
-                          color: colorScheme.onSurface.withOpacity(0.7),
+                          color: colorScheme.onSurface.withValues(alpha: 0.7),
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -808,13 +797,13 @@ class _JoinForm extends StatelessWidget {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
                               borderSide: BorderSide(
-                                color: colorScheme.outline.withOpacity(0.3),
+                                color: colorScheme.outline.withValues(alpha: 0.3),
                               ),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
                               borderSide: BorderSide(
-                                color: colorScheme.outline.withOpacity(0.3),
+                                color: colorScheme.outline.withValues(alpha: 0.3),
                               ),
                             ),
                             focusedBorder: OutlineInputBorder(
@@ -825,7 +814,7 @@ class _JoinForm extends StatelessWidget {
                               ),
                             ),
                             filled: true,
-                            fillColor: colorScheme.surfaceContainer.withOpacity(0.3),
+                            fillColor: colorScheme.surfaceContainer.withValues(alpha: 0.3),
                             contentPadding: const EdgeInsets.symmetric(
                               horizontal: 20,
                               vertical: 16,
@@ -879,7 +868,7 @@ class _JoinForm extends StatelessWidget {
                       Text(
                         'By joining, you agree to earn points and receive awesome rewards!',
                         style: theme.textTheme.bodySmall?.copyWith(
-                          color: colorScheme.onSurface.withOpacity(0.6),
+                          color: colorScheme.onSurface.withValues(alpha: 0.6),
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -940,7 +929,7 @@ class _ErrorView extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
-                  color: colorScheme.errorContainer.withOpacity(0.3),
+                  color: colorScheme.errorContainer.withValues(alpha: 0.3),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
@@ -960,7 +949,7 @@ class _ErrorView extends StatelessWidget {
               Text(
                 error,
                 style: theme.textTheme.bodyMedium?.copyWith(
-                  color: colorScheme.onSurface.withOpacity(0.7),
+                  color: colorScheme.onSurface.withValues(alpha: 0.7),
                 ),
                 textAlign: TextAlign.center,
               ),

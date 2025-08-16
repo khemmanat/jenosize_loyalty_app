@@ -7,8 +7,8 @@ import '../../design_system/responsive_typography.dart';
 enum ButtonVariant { filled, outlined, text }
 enum ButtonSize { small, medium, large }
 
-class ResponsiveButton extends StatelessWidget {
-  const ResponsiveButton({
+class AppButton extends StatelessWidget {
+  const AppButton({
     super.key,
     required this.onPressed,
     required this.child,
@@ -29,7 +29,6 @@ class ResponsiveButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final isMobile = MediaQuery.of(context).size.width < AppDimensions.breakpointMd;
     final height = _getHeight(context);
     final textStyle = _getTextStyle(context);
 

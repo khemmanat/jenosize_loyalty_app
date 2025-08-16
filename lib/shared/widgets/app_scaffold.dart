@@ -45,6 +45,7 @@ class AppScaffold extends StatelessWidget {
         right: right,
         child: Scaffold(
           appBar: appBar,
+          backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
           body: SizedBox(width: double.infinity, height: double.infinity, child: body),
           bottomNavigationBar: bottomNavigationBar,
           floatingActionButton: floatingActionButton,

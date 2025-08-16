@@ -3,8 +3,8 @@ import 'package:jenosize_loyalty_app/shared/design_system/app_dimensions.dart';
 import 'package:jenosize_loyalty_app/shared/design_system/responsive_dimensions.dart';
 import 'package:jenosize_loyalty_app/shared/design_system/responsive_typography.dart';
 
-class ResponsiveEmptyState extends StatelessWidget {
-  const ResponsiveEmptyState({
+class AppEmptyState extends StatelessWidget {
+  const AppEmptyState({
     super.key,
     required this.icon,
     required this.title,
@@ -39,7 +39,7 @@ class ResponsiveEmptyState extends StatelessWidget {
                 ResponsiveDimensions.getSpacing(context, 32),
               ),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
+                color: Theme.of(context).colorScheme.primaryContainer.withValues(alpha:0.3),
                 shape: BoxShape.circle,
               ),
               child: Icon(
@@ -67,7 +67,7 @@ class ResponsiveEmptyState extends StatelessWidget {
             Text(
               message,
               style: ResponsiveTypography.getBodyText(context).copyWith(
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                color: Theme.of(context).colorScheme.onSurface.withValues(alpha:0.7),
               ),
               textAlign: TextAlign.center,
             ),

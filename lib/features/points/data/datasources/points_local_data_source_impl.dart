@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/errors/result.dart';
-import '../../../../shared/domain/value_objects.dart';
+import '../../../../shared/domain/domain.dart';
 import '../../domain/entities/point_transaction.dart';
 import 'points_local_data_source.dart';
 

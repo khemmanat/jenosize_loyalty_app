@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../di/points_di.dart';
@@ -16,7 +17,7 @@ final pointsCombinedProvider = FutureProvider.autoDispose<PointsCombined>((ref) 
   final getTransaction = ref.read(getPointTransactionsProvider);
   final r1 = await getSummary();
   final r2 = await getTransaction(page: 1, limit: 50);
-  print('PointsCombinedProvider: r1=$r1, r2=$r2');
+  debugPrint('PointsCombinedProvider: r1=$r1, r2=$r2');
   return r1.fold(
     onSuccess: (s) async => r2.fold(
       onSuccess: (tx) => PointsCombined(summary: s, transactions: tx),

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../core/errors/failures.dart';
 import '../../../../core/errors/result.dart';
@@ -39,7 +40,7 @@ class PointsRemoteDataSourceImpl implements PointsRemoteDataSource {
         return const Err(UnexpectedFailure('Items field is not a list'));
       }
 
-      print('Fetched ${itemsData.length} transactions from API');
+      debugPrint('Fetched ${itemsData.length} transactions from API');
 
       final items = itemsData.map((j) => PointTransactionDto.fromJson(j)).toList();
       return Ok(items);

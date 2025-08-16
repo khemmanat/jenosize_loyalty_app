@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jenosize_loyalty_app/shared/shared.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../di/referral_di.dart';
 import '../../domain/entities/referral.dart';
+import '../constants/message_constants.dart';
 import '../providers/referral_ui_providers.dart';
 
 class ReferralPage extends ConsumerStatefulWidget {
@@ -57,17 +59,9 @@ class _ReferralPageState extends ConsumerState<ReferralPage> with SingleTickerPr
     final myCode = ref.watch(myCodeProvider);
     final history = ref.watch(historyPage1Provider);
 
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
-      appBar: AppBar(
-        title: const Text(
-          'Refer Friends',
-          style: TextStyle(fontWeight: FontWeight.w600),
-        ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        foregroundColor: Theme.of(context).colorScheme.onSurface,
+    return AppScaffold(
+      appBar: MainAppBar(
+        title: 'Refer Friends',
       ),
       body: RefreshIndicator(
         onRefresh: () async {
@@ -203,15 +197,14 @@ class _ReferralPageState extends ConsumerState<ReferralPage> with SingleTickerPr
 
   Future<void> _shareReferralCode(String code) async {
     try {
-      final shareText = '''
-🎉 Join me on this amazing loyalty program!
+      final shareText = MessageConstants.referralShareMessage(code);
 
-Use my referral code: $code
+      final shareParam = ShareParams(
+        text: shareText,
+        subject: 'Join Our Loyalty Program!',
+      );
 
-Start earning points and unlock exclusive rewards! 🌟
-''';
-
-      await Share.share(shareText, subject: 'Join Our Loyalty Program!');
+      await SharePlus.instance.share(shareParam);
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -339,7 +332,7 @@ class _HeroSection extends StatelessWidget {
           end: Alignment.bottomRight,
           colors: [
             colorScheme.primaryContainer,
-            colorScheme.primary.withOpacity(0.1),
+            colorScheme.primary.withValues(alpha:0.1),
           ],
         ),
         borderRadius: BorderRadius.circular(20),
@@ -349,7 +342,7 @@ class _HeroSection extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: colorScheme.primary.withOpacity(0.1),
+              color: colorScheme.primary.withValues(alpha:0.1),
               shape: BoxShape.circle,
             ),
             child: Icon(
@@ -371,7 +364,7 @@ class _HeroSection extends StatelessWidget {
           Text(
             'Share your referral code and both you and your friends will earn bonus points!',
             style: theme.textTheme.bodyLarge?.copyWith(
-              color: colorScheme.onSurface.withOpacity(0.7),
+              color: colorScheme.onSurface.withValues(alpha:0.7),
             ),
             textAlign: TextAlign.center,
           ),
@@ -434,13 +427,13 @@ class _MyReferralCodeCardState extends State<_MyReferralCodeCard> with SingleTic
           end: Alignment.bottomRight,
           colors: [
             colorScheme.primary,
-            colorScheme.primary.withOpacity(0.8),
+            colorScheme.primary.withValues(alpha:0.8),
           ],
         ),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.primary.withOpacity(0.3),
+            color: colorScheme.primary.withValues(alpha:0.3),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),
@@ -456,7 +449,7 @@ class _MyReferralCodeCardState extends State<_MyReferralCodeCard> with SingleTic
               width: 120,
               height: 120,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.1),
+                color: Colors.white.withValues(alpha:0.1),
                 shape: BoxShape.circle,
               ),
             ),
@@ -470,7 +463,7 @@ class _MyReferralCodeCardState extends State<_MyReferralCodeCard> with SingleTic
                 Text(
                   'Your Referral Code',
                   style: theme.textTheme.titleMedium?.copyWith(
-                    color: Colors.white.withOpacity(0.9),
+                    color: Colors.white.withValues(alpha:0.9),
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -480,10 +473,10 @@ class _MyReferralCodeCardState extends State<_MyReferralCodeCard> with SingleTic
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withValues(alpha:0.2),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: Colors.white.withOpacity(0.3),
+                      color: Colors.white.withValues(alpha:0.3),
                     ),
                   ),
                   child: Row(
@@ -732,7 +725,7 @@ class _HowItWorksSection extends StatelessWidget {
                       Text(
                         step['description'] as String,
                         style: theme.textTheme.bodyMedium?.copyWith(
-                          color: colorScheme.onSurface.withOpacity(0.7),
+                          color: colorScheme.onSurface.withValues(alpha:0.7),
                         ),
                       ),
                     ],
@@ -763,7 +756,7 @@ class _ReferralHistoryCard extends StatelessWidget {
         color: colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: colorScheme.outline.withOpacity(0.1),
+          color: colorScheme.outline.withValues(alpha:0.1),
         ),
       ),
       child: ListTile(
@@ -788,7 +781,7 @@ class _ReferralHistoryCard extends StatelessWidget {
         subtitle: Text(
           _formatDate(referral.createdAt),
           style: theme.textTheme.bodySmall?.copyWith(
-            color: colorScheme.onSurface.withOpacity(0.6),
+            color: colorScheme.onSurface.withValues(alpha:0.6),
           ),
         ),
         trailing: Container(
@@ -797,7 +790,7 @@ class _ReferralHistoryCard extends StatelessWidget {
             vertical: 4,
           ),
           decoration: BoxDecoration(
-            color: Colors.green.withOpacity(0.1),
+            color: Colors.green.withValues(alpha:0.1),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Text(
@@ -843,7 +836,7 @@ class _EmptyHistory extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: colorScheme.primaryContainer.withOpacity(0.3),
+              color: colorScheme.primaryContainer.withValues(alpha:0.3),
               shape: BoxShape.circle,
             ),
             child: Icon(
@@ -863,7 +856,7 @@ class _EmptyHistory extends StatelessWidget {
           Text(
             'Start sharing your referral code to earn bonus points!',
             style: theme.textTheme.bodyMedium?.copyWith(
-              color: colorScheme.onSurface.withOpacity(0.7),
+              color: colorScheme.onSurface.withValues(alpha:0.7),
             ),
             textAlign: TextAlign.center,
           ),
@@ -901,7 +894,7 @@ class _CodeErrorCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.errorContainer.withOpacity(0.3),
+        color: Theme.of(context).colorScheme.errorContainer.withValues(alpha:0.3),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -963,7 +956,7 @@ class _HistoryErrorView extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.errorContainer.withOpacity(0.3),
+        color: Theme.of(context).colorScheme.errorContainer.withValues(alpha:0.3),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(

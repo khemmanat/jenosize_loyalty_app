@@ -4,8 +4,8 @@ import '../../design_system/app_dimensions.dart';
 import '../../design_system/responsive_dimensions.dart';
 import '../../design_system/responsive_typography.dart';
 
-class ResponsiveTextField extends StatelessWidget {
-  const ResponsiveTextField({
+class AppTextField extends StatelessWidget {
+  const AppTextField({
     super.key,
     required this.controller,
     this.labelText,
@@ -47,13 +47,13 @@ class ResponsiveTextField extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppDimensions.radiusLg),
           borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.outline.withOpacity(0.3),
+            color: Theme.of(context).colorScheme.outline.withValues(alpha:0.3),
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppDimensions.radiusLg),
           borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.outline.withOpacity(0.3),
+            color: Theme.of(context).colorScheme.outline.withValues(alpha:0.3),
           ),
         ),
         focusedBorder: OutlineInputBorder(
@@ -70,14 +70,14 @@ class ResponsiveTextField extends StatelessWidget {
           ),
         ),
         filled: true,
-        fillColor: Theme.of(context).colorScheme.surfaceContainer.withOpacity(0.3),
+        fillColor: Theme.of(context).colorScheme.surfaceContainer.withValues(alpha:0.3),
         contentPadding: EdgeInsets.symmetric(
           horizontal: ResponsiveDimensions.getSpacing(context, 16),
           vertical: ResponsiveDimensions.getSpacing(context, isMobile ? 12 : 16),
         ),
         labelStyle: ResponsiveTypography.getLabel(context),
         hintStyle: ResponsiveTypography.getBodyText(context).copyWith(
-          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+          color: Theme.of(context).colorScheme.onSurface.withValues(alpha:0.6),
         ),
       ),
     );

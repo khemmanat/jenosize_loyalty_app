@@ -4,8 +4,8 @@ import 'package:jenosize_loyalty_app/shared/design_system/responsive_typography.
 
 import '../../design_system/app_dimensions.dart';
 
-class ResponsiveLoadingCard extends StatefulWidget {
-  const ResponsiveLoadingCard({
+class LoadingCard extends StatefulWidget {
+  const LoadingCard({
     super.key,
     this.height,
     this.title,
@@ -17,10 +17,10 @@ class ResponsiveLoadingCard extends StatefulWidget {
   final bool showPulse;
 
   @override
-  State<ResponsiveLoadingCard> createState() => _ResponsiveLoadingCardState();
+  State<LoadingCard> createState() => _LoadingCardState();
 }
 
-class _ResponsiveLoadingCardState extends State<ResponsiveLoadingCard>
+class _LoadingCardState extends State<LoadingCard>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
@@ -77,7 +77,7 @@ class _ResponsiveLoadingCardState extends State<ResponsiveLoadingCard>
           child: CircularProgressIndicator(
             strokeWidth: 2,
             color: widget.showPulse
-                ? Theme.of(context).colorScheme.primary.withOpacity(_animation.value)
+                ? Theme.of(context).colorScheme.primary.withValues(alpha:_animation.value)
                 : Theme.of(context).colorScheme.primary,
           ),
         ),
@@ -91,8 +91,8 @@ class _ResponsiveLoadingCardState extends State<ResponsiveLoadingCard>
               widget.title!,
               style: ResponsiveTypography.getBodyText(context).copyWith(
                 color: widget.showPulse
-                    ? Theme.of(context).colorScheme.onSurface.withOpacity(_animation.value)
-                    : Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                    ? Theme.of(context).colorScheme.onSurface.withValues(alpha:_animation.value)
+                    : Theme.of(context).colorScheme.onSurface.withValues(alpha:0.7),
               ),
               textAlign: TextAlign.center,
             ),

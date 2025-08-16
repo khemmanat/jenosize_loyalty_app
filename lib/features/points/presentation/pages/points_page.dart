@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:jenosize_loyalty_app/shared/shared.dart';
 
 import '../../di/points_di.dart';
 import '../../domain/entities/point_summary.dart';
@@ -53,17 +54,9 @@ class _PointsPageState extends ConsumerState<PointsPage> with SingleTickerProvid
   Widget build(BuildContext context) {
     final pointsState = ref.watch(pointsCombinedProvider);
 
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
-      appBar: AppBar(
-        title: const Text(
-          'Points Tracker',
-          style: TextStyle(fontWeight: FontWeight.w600),
-        ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        foregroundColor: Theme.of(context).colorScheme.onSurface,
+    return AppScaffold(
+      appBar: MainAppBar(
+        title: 'Points Tracker',
         actions: [
           IconButton(
             onPressed: () => ref.invalidate(pointsCombinedProvider),
@@ -152,7 +145,7 @@ class _PointsPageState extends ConsumerState<PointsPage> with SingleTickerProvid
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
+                  color: Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
@@ -167,7 +160,7 @@ class _PointsPageState extends ConsumerState<PointsPage> with SingleTickerProvid
                       child: Text(
                         'Points will be deducted from your balance',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                              color: Theme.of(context).colorScheme.onSurface.withValues(alpha:0.7),
                             ),
                       ),
                     ),
@@ -350,13 +343,13 @@ class _PointsBalanceCard extends StatelessWidget {
           end: Alignment.bottomRight,
           colors: [
             colorScheme.primary,
-            colorScheme.primary.withOpacity(0.8),
+            colorScheme.primary.withValues(alpha:0.8),
           ],
         ),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.primary.withOpacity(0.3),
+            color: colorScheme.primary.withValues(alpha:0.3),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),
@@ -372,7 +365,7 @@ class _PointsBalanceCard extends StatelessWidget {
               width: 120,
               height: 120,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.1),
+                color: Colors.white.withValues(alpha:0.1),
                 shape: BoxShape.circle,
               ),
             ),
@@ -384,7 +377,7 @@ class _PointsBalanceCard extends StatelessWidget {
               width: 80,
               height: 80,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.05),
+                color: Colors.white.withValues(alpha:0.05),
                 shape: BoxShape.circle,
               ),
             ),
@@ -403,7 +396,7 @@ class _PointsBalanceCard extends StatelessWidget {
                     Text(
                       'TOTAL BALANCE',
                       style: theme.textTheme.labelMedium?.copyWith(
-                        color: Colors.white.withOpacity(0.8),
+                        color: Colors.white.withValues(alpha:0.8),
                         letterSpacing: 1.5,
                         fontWeight: FontWeight.w600,
                       ),
@@ -429,7 +422,7 @@ class _PointsBalanceCard extends StatelessWidget {
                     Text(
                       'POINTS',
                       style: theme.textTheme.titleMedium?.copyWith(
-                        color: Colors.white.withOpacity(0.9),
+                        color: Colors.white.withValues(alpha:0.9),
                         letterSpacing: 2,
                         fontWeight: FontWeight.w500,
                       ),
@@ -442,7 +435,7 @@ class _PointsBalanceCard extends StatelessWidget {
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withValues(alpha:0.2),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
@@ -550,7 +543,7 @@ class _StatCard extends StatelessWidget {
         color: colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: colorScheme.outline.withOpacity(0.1),
+          color: colorScheme.outline.withValues(alpha:0.1),
         ),
       ),
       child: Column(
@@ -572,7 +565,7 @@ class _StatCard extends StatelessWidget {
           Text(
             label,
             style: theme.textTheme.bodySmall?.copyWith(
-              color: colorScheme.onSurface.withOpacity(0.7),
+              color: colorScheme.onSurface.withValues(alpha:0.7),
             ),
           ),
         ],
@@ -599,7 +592,7 @@ class _TransactionCard extends StatelessWidget {
         color: colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: colorScheme.outline.withOpacity(0.1),
+          color: colorScheme.outline.withValues(alpha:0.1),
         ),
       ),
       child: ListTile(
@@ -607,7 +600,7 @@ class _TransactionCard extends StatelessWidget {
         leading: Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
+            color: color.withValues(alpha:0.1),
             shape: BoxShape.circle,
           ),
           child: Icon(
@@ -625,7 +618,7 @@ class _TransactionCard extends StatelessWidget {
         subtitle: Text(
           _formatDate(transaction.createdAt),
           style: theme.textTheme.bodySmall?.copyWith(
-            color: colorScheme.onSurface.withOpacity(0.6),
+            color: colorScheme.onSurface.withValues(alpha:0.6),
           ),
         ),
         trailing: Container(
@@ -634,7 +627,7 @@ class _TransactionCard extends StatelessWidget {
             vertical: 6,
           ),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
+            color: color.withValues(alpha:0.1),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
@@ -682,7 +675,7 @@ class _EmptyTransactions extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: colorScheme.primaryContainer.withOpacity(0.3),
+              color: colorScheme.primaryContainer.withValues(alpha:0.3),
               shape: BoxShape.circle,
             ),
             child: Icon(
@@ -702,7 +695,7 @@ class _EmptyTransactions extends StatelessWidget {
           Text(
             'Start earning points by joining campaigns!',
             style: theme.textTheme.bodyMedium?.copyWith(
-              color: colorScheme.onSurface.withOpacity(0.7),
+              color: colorScheme.onSurface.withValues(alpha:0.7),
             ),
             textAlign: TextAlign.center,
           ),
@@ -728,7 +721,7 @@ class _RedeemFAB extends StatelessWidget {
     return FloatingActionButton.extended(
       onPressed: canRedeem ? onRedeem : null,
       backgroundColor: canRedeem ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.surfaceContainerHighest,
-      foregroundColor: canRedeem ? Colors.white : Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+      foregroundColor: canRedeem ? Colors.white : Theme.of(context).colorScheme.onSurface.withValues(alpha:0.6),
       icon: Icon(canRedeem ? Icons.redeem : Icons.block),
       label: Text(
         canRedeem ? 'Redeem Points' : 'No Points',
@@ -824,7 +817,7 @@ class _ErrorView extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
-                  color: colorScheme.errorContainer.withOpacity(0.3),
+                  color: colorScheme.errorContainer.withValues(alpha:0.3),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
@@ -844,7 +837,7 @@ class _ErrorView extends StatelessWidget {
               Text(
                 error,
                 style: theme.textTheme.bodyMedium?.copyWith(
-                  color: colorScheme.onSurface.withOpacity(0.7),
+                  color: colorScheme.onSurface.withValues(alpha:0.7),
                 ),
                 textAlign: TextAlign.center,
               ),

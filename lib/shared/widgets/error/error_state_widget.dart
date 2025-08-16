@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 
 import 'error_mapper.dart';
 
-class FriendlyApiError extends StatelessWidget {
-  const FriendlyApiError({
+class ErrorStateWidget extends StatelessWidget {
+  const ErrorStateWidget({
     super.key,
     required this.message,
     required this.onRetry,
@@ -17,8 +17,8 @@ class FriendlyApiError extends StatelessWidget {
     this.compact = false,
   });
 
-  /// Factory: map any error/stacktrace into a FriendlyApiError using ErrorMapper
-  factory FriendlyApiError.fromError({
+  /// Factory: map any error/stacktrace into a ErrorStateWidget using ErrorMapper
+  factory ErrorStateWidget.fromError({
     required Object error,
     StackTrace? stackTrace,
     required VoidCallback onRetry,
@@ -31,7 +31,7 @@ class FriendlyApiError extends StatelessWidget {
       'error': error.toString(),
       if (stackTrace != null) 'stack': stackTrace.toString(),
     };
-    return FriendlyApiError(
+    return ErrorStateWidget(
       title: mapped.title,
       message: mapped.message,
       statusCode: mapped.statusCode,
@@ -68,7 +68,7 @@ class FriendlyApiError extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           message,
-          style: theme.textTheme.bodyMedium?.copyWith(color: theme.textTheme.bodyMedium?.color?.withOpacity(.9)),
+          style: theme.textTheme.bodyMedium?.copyWith(color: theme.textTheme.bodyMedium?.color?.withValues(alpha: .9)),
           textAlign: TextAlign.center,
         ),
         if (suggestions.isNotEmpty) ...[
@@ -142,6 +142,8 @@ class FriendlyApiError extends StatelessWidget {
         return 'Content not found';
       case 408:
         return 'Request timed out';
+      case 409:
+        return 'Conflict occurred';
       case 500:
         return 'Server is having a bad day';
       default:
@@ -159,6 +161,8 @@ class FriendlyApiError extends StatelessWidget {
         return const ['Check the link', 'Pull to refresh'];
       case 408:
         return const ['Check your internet', 'Try again'];
+      case 409:
+        return const ['Check your input', 'Try again'];
       case 500:
         return const ['Try again in a moment'];
       default:
@@ -169,6 +173,7 @@ class FriendlyApiError extends StatelessWidget {
 
 class _TechnicalDetails extends StatelessWidget {
   const _TechnicalDetails({required this.details});
+
   final Map<String, Object?> details;
 
   @override
@@ -182,16 +187,16 @@ class _TechnicalDetails extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: theme.colorScheme.surfaceVariant.withOpacity(.5),
+            color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: .5),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ...details.entries.map((e) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 2),
-                child: Text('${e.key}: ${e.value}'),
-              )),
+                    padding: const EdgeInsets.symmetric(vertical: 2),
+                    child: Text('${e.key}: ${e.value}'),
+                  )),
               const SizedBox(height: 8),
               Align(
                 alignment: Alignment.centerRight,

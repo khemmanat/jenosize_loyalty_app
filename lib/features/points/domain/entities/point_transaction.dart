@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../../../../shared/domain/value_objects.dart';
+import '../../../../shared/domain/domain.dart';
 
 class PointTransaction extends Equatable {
   final String id;

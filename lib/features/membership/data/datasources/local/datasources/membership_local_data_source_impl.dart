@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:jenosize_loyalty_app/shared/domain/value_objects.dart';
+import 'package:jenosize_loyalty_app/shared/domain/domain.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../../core/errors/result.dart';

@@ -8,7 +8,7 @@ class ErrorPresentation {
 }
 
 class ErrorMapper {
-  static ErrorPresentation map(Object error, StackTrace? _st) {
+  static ErrorPresentation map(Object error, StackTrace? st) {
     final status = _statusCode(error);
     final msg = error.toString();
 
