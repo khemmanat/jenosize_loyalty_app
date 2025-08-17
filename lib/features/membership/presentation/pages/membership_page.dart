@@ -226,11 +226,6 @@ class _MemberView extends StatelessWidget {
 
                 // Stats Section
                 _StatsSection(member: member),
-
-                const SizedBox(height: 32),
-
-                // Quick Actions
-                _QuickActions(),
               ]),
             ),
           ),
@@ -623,25 +618,6 @@ class _StatItem extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _QuickActions extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Quick Actions',
-          style: theme.textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ],
     );
   }
 }
