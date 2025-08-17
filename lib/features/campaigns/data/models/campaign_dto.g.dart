@@ -22,6 +22,10 @@ CampaignDto _$CampaignDtoFromJson(Map<String, dynamic> json) => CampaignDto(
       endsAt: json['endsAt'] == null
           ? null
           : DateTime.parse(json['endsAt'] as String),
+      isJoined: json['isJoined'] as bool? ?? false,
+      joinedAt: json['joinedAt'] == null
+          ? null
+          : DateTime.parse(json['joinedAt'] as String),
     );
 
 Map<String, dynamic> _$CampaignDtoToJson(CampaignDto instance) =>
@@ -37,4 +41,6 @@ Map<String, dynamic> _$CampaignDtoToJson(CampaignDto instance) =>
       'createdAt': instance.createdAt.toIso8601String(),
       'startsAt': instance.startsAt?.toIso8601String(),
       'endsAt': instance.endsAt?.toIso8601String(),
+      'isJoined': instance.isJoined,
+      'joinedAt': instance.joinedAt?.toIso8601String(),
     };

@@ -61,7 +61,7 @@ class PointsRepositoryImpl implements PointsRepository {
         final domain = PointsSummary(
           totalPoints: dto.totalPoints,
           earnedThisMonth: dto.earnedThisMonth.abs(),
-          spentThisMonth: dto.redeemedThisMonth.abs(),
+          spentThisMonth: dto.spentThisMonth.abs(),
           recentTransactions: const [], // เติมถ้ามีใน API
         );
         await local.cacheSummary(domain.totalPoints, domain.earnedThisMonth, domain.spentThisMonth);

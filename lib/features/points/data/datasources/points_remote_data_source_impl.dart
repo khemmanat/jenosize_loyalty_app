@@ -40,8 +40,6 @@ class PointsRemoteDataSourceImpl implements PointsRemoteDataSource {
         return const Err(UnexpectedFailure('Items field is not a list'));
       }
 
-      debugPrint('Fetched ${itemsData.length} transactions from API');
-
       final items = itemsData.map((j) => PointTransactionDto.fromJson(j)).toList();
       return Ok(items);
     } on DioException catch (e) {
@@ -55,10 +53,12 @@ class PointsRemoteDataSourceImpl implements PointsRemoteDataSource {
   Future<Result<PointsSummaryDto>> getSummary() async {
     try {
       final r = await dio.get('/api/points/summary');
+      debugPrint('Fetched points summary: ${r.data}');
       return Ok(PointsSummaryDto.fromJson(r.data));
     } on DioException catch (e) {
       return Err(NetworkFailure(e.message ?? 'Network error', code: e.response?.statusCode));
     } catch (_) {
+      debugPrint('Error fetching points summary');
       return const Err(UnexpectedFailure('Unexpected error'));
     }
   }
